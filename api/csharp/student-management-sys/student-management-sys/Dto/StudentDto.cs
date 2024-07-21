@@ -9,14 +9,10 @@ namespace student_management_sys.Dto
         public string LastName { get; set; }
         public string IDNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }
         public string StudentNumber { get; set; }
         public string ProfilePic { get; set; }
         public string Grade { get; set; }
     }
 
-    public enum Gender
-    {
-        Male, Female
-    }
 }

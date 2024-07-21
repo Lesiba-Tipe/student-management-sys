@@ -16,6 +16,7 @@ namespace student_management_sys.Services
         public AuthService(UserManager<Account> accountManager, IConfiguration configuration) 
         {
             this.accountManager = accountManager;
+            jwtOptions = configuration.GetSection("JwtOptions");
         }
         public async Task<string> GenerateJwtToken(Account account)
         {

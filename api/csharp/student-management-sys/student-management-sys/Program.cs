@@ -6,7 +6,6 @@ using Microsoft.OpenApi.Models;
 using student_management_sys.Configs;
 using student_management_sys.Entity;
 using student_management_sys.Services;
-using System.Configuration;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 //    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 //    .AddEnvironmentVariables()
 //    .AddCommandLine(args);
+
+//builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
 // Add services to the container.
 
@@ -64,6 +65,15 @@ builder.Services.AddAuthentication(options =>
 //{
 //    options.AddPolicy("getUsers", policy => policy.RequireRole("Admin"));
 //});
+
+// Configure authorization
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("StudentPolicy", policy => policy.RequireRole("Student"));
+    options.AddPolicy("ParentPolicy", policy => policy.RequireRole("Parent"));
+});
+
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IStudentService, StudentService>();

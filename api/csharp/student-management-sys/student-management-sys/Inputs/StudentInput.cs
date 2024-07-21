@@ -18,7 +18,7 @@ namespace student_management_sys.Inputs
         public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Gender is required (Enter F- Female M or A)")]
-        public Gender Gender { get; set; }
+        public string Gender { get; set; }
 
         public string StudentNumber { get; set; }
 

@@ -1,0 +1,24 @@
+{
+  "email": "jane.doe@company.co.za",
+  "password": "Password@123",
+  "firstname": "Jana",
+  "lastname": "Doe"
+}
+
+{
+ "email": "jane.doe@company.co.za",
+  "password": "Password@123"
+}
+
+https://www.youtube.com/watch?v=qBTe6uHJS_Y&list=PL82C6-O4XrHfrGOCPmKmwTO7M0avXyQKc
+
+{
+  "firstName": "Ofentse",
+  "lastName": "Kubayi",
+  "idNumber": "string",
+  "dateOfBirth": "2024-07-21T16:06:13.030Z",
+  "gender": "Female",
+  "studentNumber": "099093",
+  "profilePic": "none",
+  "grade": "4"
+}

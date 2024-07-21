@@ -6,7 +6,7 @@ namespace student_management_sys.Entity
 {
     public class Account : IdentityUser
     {
-        public string Id { get; set; }
+        //public string Id { get; set; }
         [Required(ErrorMessage = "Firstname is required")]
         public string FirstName { get; set; }
 
@@ -15,7 +15,7 @@ namespace student_management_sys.Entity
         public string? IdNumber { get; set; }    //Optional
 
 
-        public int? StudentId { get; set; } // Nullable foreign key
+        public string? StudentId { get; set; } // Nullable foreign key
         public virtual Student? Student { get; set; }
 
         //public int? ParentId { get; set; } // Nullable foreign key

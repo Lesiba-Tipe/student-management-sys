@@ -8,6 +8,7 @@ namespace student_management_sys.Entity
     public class Student //: IdentityUser
     {
         [Key]
+        [Required(ErrorMessage = "Id is required")]
         public string StudentId { get; set; }
 
         [Required(ErrorMessage = "Fistname is required")]

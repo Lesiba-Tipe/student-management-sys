@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using student_management_sys.Configs;
 using student_management_sys.Entity;
 using student_management_sys.Inputs;
 using student_management_sys.Services;
@@ -15,10 +18,12 @@ namespace student_management_sys.Controllers
         private readonly IAuthService authService;
         private readonly AccountService accountService;
 
-        public AccountController(ILogger<AccountController> logger, IMapper mapper, IAuthService authService, AccountService accountService) : base(logger, mapper)
+        public AccountController(
+            ILogger<AccountController> logger, IMapper mapper, IAuthService authService, 
+            UserManager<Account> accountManager,StudManSysDBContext context) : base(logger, mapper, context)
         {
             this.authService = authService;
-            this.accountService = accountService;
+            accountService = new AccountService(accountManager, context);
         }
         // LOGIN | REGISTER
 
@@ -46,7 +51,7 @@ namespace student_management_sys.Controllers
                     return BadRequest(ModelState);
                 }
 
-                //await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
                 return Accepted(registerInput);
             }
@@ -71,23 +76,57 @@ namespace student_management_sys.Controllers
 
             try
             {
-                //Login
+                //Validate Email and Password
                 if (!await authService.ValidateUserWithPassword(loginInput))
                 {
                     return Unauthorized("Incorrect Username or password");
                 }
 
-                //var account = await accountService.FindUserByEmailAsync(loginInput.Email);
+                var account = await accountService.FindAccountByEmailAsync(loginInput.Email);
                 //var roles = await accountService.GetRolesAsync(user);
 
                 //
-                //var results = new { jwtToken = "Bearer " + await authService.GenerateJwtToken(account), roles = roles, id = account.Id };
+                var token = await authService.GenerateJwtToken(account);
 
-                return Accepted();
+                var results = new { jwtToken = "Bearer " + token, id = account.Id };
+                //var results = new { jwtToken = "Bearer " + token, roles = roles, id = account.Id };
+
+                return Accepted(results);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, $"something went wrong {nameof(Login)}: ");
+
+                return StatusCode(500, $"Internal server Error");
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("profile")]
+        public async Task<IActionResult> Profile(string id)
+        {
+            logger.LogInformation($"Retrieve Profile by id: {id}");
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var account = await accountService.FindAccountByIdAsync(id);
+
+                if(account == null)
+                {
+                    return BadRequest("Could not find user");
+                }
+
+                return Ok(account);     
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, $"something went wrong {nameof(Profile)}: ");
 
                 return StatusCode(500, $"Internal server Error");
             }
