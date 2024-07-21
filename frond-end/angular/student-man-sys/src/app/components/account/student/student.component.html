@@ -1,0 +1,19 @@
+<app-dashboard></app-dashboard>
+
+<section>
+    <div class="grade-subjects">
+        <h4>Grade: {{user.grade}}</h4>
+
+        <p>List of subjects you are enrolled in.</p>
+
+        <div class="subjects">
+            <ul>
+                @for (subject of subjects; track subject) {
+                    <li>{{subject}}</li>
+                  }
+            </ul>
+
+        </div>
+
+    </div>
+</section>

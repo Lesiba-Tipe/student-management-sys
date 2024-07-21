@@ -1,0 +1,29 @@
+
+section{
+    
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color:#f0f0f0; 
+
+
+    .frame{
+        max-width: 35%;
+        height: 100%;
+        padding: 0 5em;
+        text-align: center;
+        background-color: #cfcfcf;
+        border-radius: 4px;
+        
+        .login{
+            display: flex;
+            flex-direction: column;
+            gap: 1.1em;
+            div > input{
+                text-align: center;
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+
+.students-list{
+    margin-top: 1em;
+    
+}
+.btn-outline-info{
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-outline-info:hover{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}

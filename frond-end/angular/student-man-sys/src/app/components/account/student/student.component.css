@@ -1,0 +1,41 @@
+
+section{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    margin-top: 2em;
+    padding-top: 1.5;
+
+    .grade-subjects{
+        border-radius: 4px;
+        border: 1px solid var(--primary-color);
+        width: 60%;
+
+        text-align: center;
+        padding-top: 1.5em;
+
+        h4{ 
+            font-weight:bold;
+        }
+
+        .subjects{
+            
+            ul{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                /* flex-wrap: wrap; */
+
+                li{
+                    list-style-type: none;
+                    width: fit-content;
+                    border-radius: 2px;
+                    background-color: var(--secondary-color);
+                    padding: .5em 1em;
+                }
+            }
+        }
+    }
+}
