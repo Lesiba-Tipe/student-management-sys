@@ -12,6 +12,8 @@ namespace student_management_sys.Configs
         public StudManSysDBContext(DbContextOptions<StudManSysDBContext> options) : base(options) { }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Parent> Parents { get; set; }
+        public DbSet<PhysicalAddress> PhysicalAddresses { get; set; }
        
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -20,6 +22,11 @@ namespace student_management_sys.Configs
             .HasOne(s => s.Account)
             .WithOne(a => a.Student)
             .HasForeignKey<Account>(a => a.StudentId);
+
+            //builder.Entity<Parent>()
+            //.HasOne(s => s.Address)
+            //.WithOne(a => a.Parent)
+            //.HasForeignKey<PhysicalAddress>(a => a.Parent);
 
             //builder.Entity<Parent>()
             //.HasOne(p => p.Account)
