@@ -4,10 +4,24 @@
     --primary-color: #000000; 
     --secondary-color: #ffffff; 
   }
-  
-  body{
-    color: var(--primary-color);
+
+html, body { height: 100%; }
+
+body { 
+  color: var(--primary-color); 
+  margin: 0; font-family: Montserrat,Helvetica Neue,Arial,sans-serif; 
+
+  .btn-outline-primary{
+    
   }
+
+  a{
+    text-decoration: none;
+    color: var(--primary-color);  
+  }
+
   
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

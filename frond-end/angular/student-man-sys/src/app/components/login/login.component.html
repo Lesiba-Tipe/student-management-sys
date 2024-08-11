@@ -2,23 +2,23 @@
     <div class="frame">
         <h3>Student Management System</h3>
         <h5>Login</h5>
-        <form action="" class="login">
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="login">
             <div>
                 <i class="bi bi-person-fill" style="color: #222b45;"></i>
-                <input ngModel name="Email" id="Email" type="text" class="form-control" placeholder="Username" aria-label="Username">
+                <input ngModel name="Email" id="Email" type="text" class="form-control" placeholder="Email">
             </div>
               
             <div>
                 <i class="bi bi-lock-fill" style="color: #222b45;"></i>
-                <input ngModel name="Email" id="Email" type="text" class="form-control" placeholder="Username" aria-label="Username">
+                <input ngModel name="password" id="password" type="password" class="form-control" placeholder="password">
             </div>
 
             <input type="submit" value="Login" class="btn btn-primary">
-
+            <div *ngIf="invalidLogin" class="alert alert-danger margin-top" id="login-error-alert">Invalid username or password</div>
         </form>
 
         <div>
-            <a routerLink="/register" style="font-size: 15px;color: #222b45;" >Do you have an account? Login here</a>
+            <a routerLink="/register" style="font-size: 15px;color: #222b45;" >If you don't have an account. Register here</a>
         </div>
     </div>
 </section>

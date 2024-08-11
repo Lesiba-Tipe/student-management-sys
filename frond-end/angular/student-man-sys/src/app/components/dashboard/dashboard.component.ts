@@ -1,56 +1,32 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router, RouterLink } from '@angular/router';
-import { Profile } from '../../data/Profile';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { IProfile } from '../../data/profile';
+import { StudentComponent } from '../account/student/student.component';
+import { NgIf } from '@angular/common';
+import { NavBarComponent } from "../shared/nav-bar/nav-bar.component";
+import { ParentComponent } from "../account/parent/parent.component";
+import { ProfileService } from '../../services/profile.service';
+import { AdminComponent } from "../account/admin/admin.component";
+import { SideBarComponent } from '../shared/side-bar/side-bar.component';
+
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, StudentComponent, NgIf, RouterOutlet, NavBarComponent, 
+    ParentComponent, AdminComponent, SideBarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
 
-  profile : Profile
-  
+  profile : IProfile
 
   constructor(
-    private authService: AuthService,
-    private router: Router
+    private profileService: ProfileService
   ){
-    this.profile = this.authService.getProfile();
+    this.profile = this.profileService.getProfile();
   }
 
-  ngOnInit(): void {
-    this.themeSetup()
-  }
-
-  public logout() {
-    this.authService.clear();
-    this.router.navigate(['/login']);
-  }
-
-  private themeSetup(): void{
-    const theme = {   //default-theme
-      primary_color: '#BE1E2D', //Red
-      secondary_color: '#fff'   //white
-    }
-
-    if(this.profile.dashboard == 'student'){
-      theme.primary_color = '#006838'    //Green
-      theme.secondary_color = '#42B97A'  //Light-Green
-    }
-    else if(this.profile.dashboard == 'parent'){
-      theme.primary_color = '#662D91'    //Purple
-      theme.secondary_color = '#ffff'    //Light-Purple
-    }
-    else if(this.profile.dashboard == 'admin'){
-      theme.primary_color = '#2B3990'    //Blue
-      theme.secondary_color = '#ffff'    //Light-Blue
-    }
-    
-    document.documentElement.style.setProperty('--primary-color', theme.primary_color);
-    document.documentElement.style.setProperty('--secondary-color', theme.secondary_color);
-  }
 }

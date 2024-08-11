@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using student_management_sys.Configs;
+using student_management_sys.Dto;
 using student_management_sys.Entity;
 using student_management_sys.Inputs;
 using student_management_sys.Services;
@@ -11,6 +12,7 @@ using student_management_sys.Services;
 
 namespace student_management_sys.Controllers
 {
+    //[EnableCors("MyAllowSpecificOrigins")]
     [ApiController]
     [Route("api/[controller]")]
     public class AccountController : BaseController
@@ -51,9 +53,9 @@ namespace student_management_sys.Controllers
                     return BadRequest(ModelState);
                 }
 
-                await context.SaveChangesAsync();
+                //await context.SaveChangesAsync();
 
-                return Accepted(registerInput);
+                return Accepted("User registered successfully");
             }
             catch (Exception ex)
             {
@@ -103,7 +105,7 @@ namespace student_management_sys.Controllers
 
         [Authorize]
         [HttpGet]
-        [Route("profile")]
+        [Route("profile/{id}")]
         public async Task<IActionResult> Profile(string id)
         {
             logger.LogInformation($"Retrieve Profile by id: {id}");
@@ -122,7 +124,11 @@ namespace student_management_sys.Controllers
                     return BadRequest("Could not find user");
                 }
 
-                return Ok(account);     
+                var profile = mapper.Map<ProfileDto>(account);
+                //Configure Roles || fetch role
+                profile.Roles = ["student"];
+
+                return Ok(profile);     
             }
             catch (Exception ex)
             {
@@ -130,6 +136,48 @@ namespace student_management_sys.Controllers
 
                 return StatusCode(500, $"Internal server Error");
             }
+        }
+
+
+        [Authorize, HttpDelete("logout")]
+        private async Task<IActionResult> Logout()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Authorize]
+        [HttpPut("update/{id}")]
+        public async Task<ActionResult<StudentDto>> Update(string id, [FromBody] AccountDto accountDto)
+        {
+
+            if (id != accountDto.Id)
+                return BadRequest("Content did not match subject");
+
+            try
+            {
+                await accountService.UpdateAsync(accountDto);
+
+                var account = await accountService.FindAccountByIdAsync(id);
+
+                var profile = mapper.Map<ProfileDto>(account);
+
+                return Accepted(profile);
+
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                if (!EntryExist(id))
+                    return NotFound(ex);
+                else
+                    throw;
+            }
+
+           
+        }
+
+        private bool EntryExist(string id)
+        {
+            return (context.Accounts?.Any(account => account.Id == id)).GetValueOrDefault();
         }
     }
 }

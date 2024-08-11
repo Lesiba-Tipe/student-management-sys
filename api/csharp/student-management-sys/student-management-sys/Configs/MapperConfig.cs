@@ -12,6 +12,7 @@ namespace student_management_sys.Configs
             CreateMap<Account, RegisterInput>().ReverseMap();
             CreateMap<Account, AccountDto>().ReverseMap();
             CreateMap<Account, Student>().ReverseMap();
+            CreateMap<Account, ProfileDto>().ReverseMap();
             CreateMap<Student, StudentInput>().ReverseMap();
         }
     }

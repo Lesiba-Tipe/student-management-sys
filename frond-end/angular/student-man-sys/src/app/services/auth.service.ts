@@ -23,25 +23,16 @@ export class AuthService {
     return localStorage.getItem('jwtToken');
   }
 
+  // public getId(): string | any {
+  //   return localStorage.getItem('Id');
+  // }
 
-  public getId(): string | any {
-    return localStorage.getItem('Id');
-  }
-
-  public setId(Id: string) {
-    localStorage.setItem('Id', Id);
-  }
+  // public setId(Id: string) {
+  //   localStorage.setItem('Id', Id);
+  // }
 
   public clear() {
     localStorage.clear();
   }
 
-  public setProfile(profile: {} | any){
-    localStorage.setItem('Profile',JSON.stringify(profile));
-  }
-
-  public getProfile(){
-    const profile = localStorage.getItem('Profile')
-    return profile ? JSON.parse(profile) : null;
-  }
 }

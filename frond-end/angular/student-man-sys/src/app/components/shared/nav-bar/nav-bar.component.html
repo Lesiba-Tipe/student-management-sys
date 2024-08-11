@@ -1,0 +1,13 @@
+<section>
+    <div class="nav-bar">      
+        <h4><a routerLink="/dashboard" class="">{{profile.dashboard}}</a></h4>
+        
+        <div class="profile">
+            <ul>
+              <li><a routerLink="/profile" class="bi bi-person-fill"> {{profile.firstName}} {{profile.lastName}}</a></li>
+              <li><a href="" (click)="logout()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout" class="bi bi-box-arrow-left"></a></li>
+            </ul> 
+        </div>
+    
+    </div>
+</section>

@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore;
 using student_management_sys.Configs;
-using student_management_sys.Controllers;
-using student_management_sys.Dto;
 using student_management_sys.Entity;
 using student_management_sys.Repository;
 

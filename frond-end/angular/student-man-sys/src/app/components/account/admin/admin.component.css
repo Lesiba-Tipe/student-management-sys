@@ -1,0 +1,21 @@
+section{
+    display: flex;
+    justify-content: center;
+    gap: .9em;
+    margin: .5em .5em;
+}
+.sms-card{
+    width: fit-content;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: .5em .9em;
+    border-radius: 2.5px;
+}
+
+.card-grow {
+    transition: all 0.2s ease-in-out;       
+}
+
+.card-grow:hover {
+    transform: scale(1.05);
+} 

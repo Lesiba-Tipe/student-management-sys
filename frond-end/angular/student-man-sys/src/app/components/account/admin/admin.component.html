@@ -1,1 +1,40 @@
-<app-dashboard></app-dashboard>
+
+<section >
+    
+   <a routerLink="/students/students-list">
+        <div  class="sms-card card-grow">
+            <div class="card-head">
+                <h5 class="bi bi-person-fill" > Students</h5>
+            </div>
+
+            <div class="card-body">
+                <p class="bi bi-person-fill-check" > Active: 365</p>
+                <p class="bi bi-person-x" > Active: 43</p>
+            </div>
+
+            <div class="card-footer">
+                <p class="bi bi-buildings" > Campus: 02</p>
+            </div>
+        </div>
+   </a>
+
+    <a routerLink="/parents">
+        <div  class="sms-card card-grow">
+            <div class="card-head">
+                <h5 class="bi bi-person-fill" > Parents</h5>
+            </div>
+
+            <div class="card-body">
+                <p class="bi bi-person-fill-check" > Active: 218</p>
+                <p class="bi bi-person-x" > Inactive: 12</p>
+            </div>
+
+            <div class="card-footer">
+                <p class="bi bi-buildings" > Campus: 02</p>
+            </div>
+        </div>
+    </a>
+
+</section>
+
+<router-outlet></router-outlet>

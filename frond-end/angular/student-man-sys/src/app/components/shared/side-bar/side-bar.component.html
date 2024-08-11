@@ -1,0 +1,36 @@
+
+<div class="sidebar-container" [class.collapsed]="isCollapsed">
+    <button class="toggle-btn" (click)="toggleSidebar()">
+      <mat-icon>{{ isCollapsed ? 'menu' : 'close' }}</mat-icon>
+    </button>
+  
+    <mat-accordion *ngIf="!isCollapsed">
+      <!-- Users Section -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>group</mat-icon> Users
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item>All Users</mat-list-item>
+          <mat-list-item>Add New User</mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+  
+      <!-- Account Section -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>account_circle</mat-icon> Account
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item>Profile</mat-list-item>
+          <mat-list-item>Settings</mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+    
+  </div>
+  

@@ -1,58 +1,52 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { RouterLink} from '@angular/router';
-import { Profile } from '../../data/Profile';
+import { NgIf } from '@angular/common';
+import { IProfile } from '../../data/profile';
+import { ProfileService } from '../../services/profile.service';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule,NgIf],
+  providers: [
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
 export class LoginComponent {
 
   invalidLogin: boolean = false;
-
-  profile : Profile = {
-    id: 'null-id',
-    email: 'student@evasity.ac.za',
-    dashboard: 'parent',
-    firstname: 'Jane',
-    lastname: 'Doe',
-    role: 'parent',
-    dateOfBirth: new Date(2009,3,5),
-    idNumber: '090305-7593-208',
-    studentNo: '35612896',
-    gender: 'Male',
-    grade: '9',
-    profilePic: 'https://drive.google.com/file/d/1cDN2LV1TTTntYSc_IqQ1QITX_fPsuhSE/'
-  }
-
-
 
   constructor(
     private accountService: AccountService, 
     private authService: AuthService,
     private router: Router,
+    private profileService: ProfileService
   ){
-
-    authService.setProfile(this.profile);
+    this.authService.clear();
   }
 
-  login(loginForms: NgForm) {
+  login(loginForm: NgForm) {
 
-    this.accountService.login(loginForms.value).subscribe(
-      (response: any) => {
-        this.onSuccess(response)        
+    this.accountService.login(loginForm.value).subscribe({
+      next: (response: any) => {
+        if(response){
+          this.onLoginSuccess(response)        
+        }
       },
-      (error) => {   
+      error: (error) => {   
       
         if(error.status === 0)
         {
-            alert('Server is not available, Please try again later');
+          console.log('STATUS : ', error.status)
+          console.log('ERROR: ', error)
+          
+          alert('Server is not available, Please try again later');
         }
         else{
           var displayErrorAlert = document.getElementById('login-error-alert');   
@@ -72,30 +66,35 @@ export class LoginComponent {
           console.log('STATUS: ', error.status)
           console.log('ERROR: ', error)
         }
-      }
-    );
+      },
+
+    });
+
   }
 
- 
-  onSuccess(response: any){
-        this.invalidLogin = false;
+  onLoginSuccess(response: any){   //Set || Save user data [id, roles, token and profile]
+    this.invalidLogin = false;
 
-        this.authService.setToken(response.jwtToken);
-        console.log(response.jwtToken)
+    this.authService.setToken(response.jwtToken);
+    var profile : IProfile //{ [key: string]: any } = {};
+    console.log('TOKEN:', response.jwtToken)
+    //Get Profile
+    this.accountService.getProfile(response.id).subscribe({
+      next: (response: any) => 
+        { 
+          profile = response; 
+          profile.dashboard = 'admin'; //response.roles[0]
+          profile.role = 'admin'; //response.roles[0]
+          
+          this.authService.setRoles(response.roles)
+          this.profileService.setProfile(profile)
 
-        this.authService.setRoles(response.roles);
-        this.authService.setId(response.id);
+          this.router.navigate(['/dashboard'])
+        },
+      error: (error) => {
+        this.router.navigate(['/login']) //change to 404 not Found
+      } 
+    });
 
-        const role = response.roles[0];
-        console.log('ROLE:', role)
-
-        //Initialize user
-        //this.initilize_Profile()
-
-        //this.themeSetup()
-        this.router.navigate(['/dashboard']);       
   }
-
-
-
 }

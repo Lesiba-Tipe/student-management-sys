@@ -1,0 +1,40 @@
+/* Primary #5606c0;  Purple */
+section{
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 65px; */
+    .nav-bar{
+        display: flex;
+        flex-direction: row;
+        justify-content:space-between;
+        
+        /* height: 20px; */
+        padding-left: 3em;
+        padding-right: 3.5em;
+        /* padding-bottom: 0px; */
+        border-bottom: 1px solid var(--primary-color);
+
+        h4{
+            font-style: italic;
+            font-weight: bold;
+
+            a{
+                text-decoration: none;
+                color: inherit;
+            }
+        }
+
+        .profile{
+            display: flex;
+            align-items: center;
+            ul{
+                
+                display: flex;
+                flex-direction: row;
+                list-style-type: none;
+                gap: 1.5em;
+            }
+        }
+    }
+
+}

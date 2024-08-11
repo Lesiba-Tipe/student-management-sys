@@ -1,6 +1,6 @@
 
 .profile{
-    display: none;
+    display: flex;
     flex-direction: row;
     justify-content: center;
     
@@ -19,45 +19,7 @@
     
 }
 
-.edit{
 
-    .edit-group{
-        padding: 1.5em 3em;
-        margin: 0 auto;
-        width: 60%;
-
-        text-align: center;
-        border-radius: 4px;
-        background-color: rgb(247, 247, 247);
-
-        h5{
-            font-weight: bold;
-        }
-
-        form{
-            display: flex;
-            flex-direction: column;
-            
-            gap: 1em;
-            .row{
-                .col{
-
-                }
-            }
-        }
-    }
-}
-
-.alerts{
-    display: none;
-    width: fit-content;
-
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-}
 
 .message{
     color:red;

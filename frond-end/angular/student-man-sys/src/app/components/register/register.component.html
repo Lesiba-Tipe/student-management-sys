@@ -2,16 +2,27 @@
     <div class="frame">
         <h3>Student Management System</h3>
         <h5>Register</h5>
-        <form action="" class="login">
+
+        <form [formGroup]="formGroupRegister" (ngSubmit)="register()" class="login">
+            
             <div class="row">
                 <div class="col">
                     <i class="bi bi-person-fill" style="color: #222b45;"></i>
-                    <input ngModel name="Firstname" id="Firstname" type="text" class="form-control" placeholder="Firstname" aria-label="Firstname">
+                    <input formControlName="firstname"  type="text" class="form-control" placeholder="Firstname" aria-label="Firstname" [ngClass]="{ 'is-invalid': submitted && f['firstname'].errors }" >
+
+                    <div *ngIf="submitted &&  f['firstname'].errors" class="invalid-feedback">
+                        <div *ngIf="formGroupRegister.get('firstname')?.hasError('required')">Firstname Required</div>
+                      </div>
+
                 </div>
                   
                 <div class="col">
                     <i class="bi bi-person-fill" style="color: #222b45;"></i>
-                    <input ngModel name="Lastname" id="Lastname" type="text" class="form-control" placeholder="Lastname" aria-label="Lastname">
+                    <input  formControlName="lastname" id="Lastname" type="text" class="form-control" placeholder="Lastname" aria-label="Lastname" [ngClass]="{ 'is-invalid': submitted && f['firstname'].errors }">
+
+                    <div *ngIf="submitted &&  f['lastname'].errors" class="invalid-feedback">
+                        <div *ngIf="formGroupRegister.get('lastname')?.hasError('required')">Lastname Required</div>
+                    </div>
                 </div>
     
             </div>
@@ -19,15 +30,45 @@
             <div class="row">
                 <div class="col">
                     <i class="bi bi-envelope-fill" style="color: #222b45;"></i>
-                    <input ngModel name="Email" id="Email" type="text" class="form-control" placeholder="Email" aria-label="Email">
+                    <input  formControlName="email" type="text" class="form-control" placeholder="Email" aria-label="Email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                      <div *ngIf="f['email'].errors?.['email']">Example: someone&#64;company.com</div>
+                      <div *ngIf="f['email'].errors?.['required']">Email Required</div>
+                    </div>
                 </div>
                   
                 <div class="col">
-                    <i class="bi bi-telephone-fill" style="color: #222b45;"></i>
-                    <input ngModel name="PhoneNumber" id="PhoneNumber" type="text" class="form-control" placeholder="PhoneNumber" aria-label="PhoneNumber">
+                    <i class="bi bi-telephone-fill" style="color: #222b45;"></i> 
+                    <span class="fs-6 fst-italic  text-sm-end">Optional</span>
+                    <input  formControlName="phoneNumber" type="text" class="form-control" placeholder="PhoneNumber" aria-label="PhoneNumber">
                 </div>
     
             </div>
+
+            <div class="row">
+                <div class="col-6">
+                  <div class="input-field">               
+                    <input formControlName="password" type="password"  id="Password" placeholder="Password" class="form-control" placeholder="Password" class="form-control" aria-label="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+
+                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                      <div *ngIf="f['password'].errors?.['required']">Password Required</div>
+                    </div>
+                    
+                  </div>
+                </div>
+    
+                <div class="col-6">
+                  <div   class="input-field">              
+                    <input formControlName="confirmPassword" name="password" type="password"  id="ConfirmPassword" placeholder="Confirm password" class="form-control" aria-label="confirmPassword" [ngClass]="{ 'is-invalid': submitted && formGroupRegister.errors }" />
+    
+                    <div *ngIf="formGroupRegister.hasError('passwordMismatch') && formGroupRegister.get('confirmPassword')?.touched" class="invalid-feedback">
+                        Passwords do not match
+                      </div>
+                  </div>	
+                </div>	
+    
+              </div>
 
             <input type="submit" value="Login" class="btn btn-primary">
 

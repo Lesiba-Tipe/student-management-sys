@@ -1,0 +1,54 @@
+ng g s services/student --skip-tests
+
+[BUGS]
+    > Update profile in the local storage after successful profile update.
+[FEATURES]
+    > Unit tests
+
+
+link to assets
+    > https://www.creative-tim.com/product/argon-dashboard#
+    > https://demos.creative-tim.com/now-ui-dashboard/docs/1.0/components/navbar.html
+
+    https://medium.com/@siva.veeravarapu/role-based-authorization-in-net-core-a-beginners-guide-with-code-snippets-b952e5b952f7
+
+    https://mdbootstrap.com/docs/angular/data/tables/
+
+    https://mdbootstrap.com/docs/angular/templates/admin-dashboard/
+
+{
+"firstName": "Jane",
+"lastName": "Doe",
+"idNumber": "0403015747081",
+"dateOfBirth": "2024-08-06T18:23:00.722Z",
+"gender": "Male",
+"studentNumber": "4481769",
+"profilePic": "https://mdbootstrap.com/img/new/avatars/7.jpg",
+"grade":"11"
+}
+
+[FOLDER STRUCTURE]
+
+    src--
+        > app--
+            > auth
+                -- auth.guard.ts
+                -- auth.intercept.ts
+            > components
+                > dashboard // calls navbar and appropriate user-logged-in-dashboard
+                    > admin
+                    > user-1  // Remame to employee, customer, student etc
+                    > user-2  // Remame to employee, customer, student etc
+                > account
+                    > login
+                    > register
+                    > profile
+                > error // Handles all error relateed pages
+                > shared
+                    > header | navbar
+                    > footer
+                > crud // Crud related
+                    > products [ product-add | product-get | product-edit | product-delete ]
+                    > students
+            > services
+            > entity

@@ -4,7 +4,7 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 @Component({
   selector: 'app-student',
   standalone: true,
-  imports: [DashboardComponent],
+  imports: [],
   templateUrl: './student.component.html',
   styleUrl: './student.component.css'
 })

@@ -1,0 +1,39 @@
+
+section{
+    display: flex;
+    justify-content: center;
+}
+
+.table-wrapper {
+    width: 70%;
+  }
+
+  .name-column {
+    display: flex;
+    align-items: center;
+  }
+  
+  .name-column img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .email {
+    font-size: 0.85em;
+    color: gray;
+  }
+
+  tr.mat-mdc-row:hover {
+    color: #000000de;
+    background-color: rgba(212, 212, 212, 0.267); /* Light gray background */
+    cursor: pointer; 
+    transition: background-color 0.3s;
+}
+  

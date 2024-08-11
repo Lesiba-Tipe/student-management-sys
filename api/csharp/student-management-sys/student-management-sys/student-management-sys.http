@@ -1,6 +1,8 @@
-@student_management_sys_HostAddress = http://localhost:5276
+@student_management_sys_HostAddress = http://localhost:41913
 
-GET {{student_management_sys_HostAddress}}/weatherforecast/
+POST {{student_management_sys_HostAddress}}/api/account/login/
 Accept: application/json
+Content-Type: application/json
+
 
 ###

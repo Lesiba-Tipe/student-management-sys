@@ -1,48 +1,9 @@
-/* Primary #5606c0;  Purple */
 
 
-section{
-    display: flex;
-    flex-direction: column;
+ 
 
-    a{
-        text-decoration: none;
-    }
-    .nav-bar{
-        display: flex;
-        flex-direction: row;
-        justify-content:space-between;
 
-        padding-left: 3em;
-        padding-right: 3.5em;
-        border-bottom: 1px solid var(--primary-color);
 
-        h4{
-            font-style: italic;
-            font-weight: bold;
-        }
 
-        .profile{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            
-            ul{
-                
-                display: flex;
-                flex-direction: row;
-                list-style-type: none;
-                gap: 1.5em;
-
-                a{color: var(--primary-color);}
-            }
-        }
-    }
-
-    .class-profile{
-        display: flex;
-        flex-direction: row;
-        gap: .5em;
-        width: 80%;
-    }
-}
+  
+  

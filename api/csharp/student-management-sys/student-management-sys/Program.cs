@@ -10,20 +10,27 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add configuration providers
-//builder.Configuration
-//    .SetBasePath(Directory.GetCurrentDirectory())
-//    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-//    .AddEnvironmentVariables()
-//    .AddCommandLine(args);
-
-//builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-// Add services to the container.
-
 // Configure log4net logging
 builder.Logging.ClearProviders();
 builder.Logging.AddLog4Net("log4net.config");
+
+// Enable CORS
+var corsPolicy = builder.Configuration.GetSection("CorsPolicy");
+var clientPolicy = corsPolicy.GetSection("clientsCORSPolicy");
+var clients = clientPolicy.Get<List<string>>()?.ToArray();
+
+var clientsCORSPolicy = "MyAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(clientsCORSPolicy, policy =>
+    {
+        policy.WithOrigins(clients);
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowCredentials();
+    });
+});
 
 builder.Services.AddControllers();
 
@@ -35,9 +42,9 @@ builder.Services.AddIdentity<Account, IdentityRole>()
                 .AddDefaultTokenProviders();
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
-    {
+{
         options.TokenLifespan = TimeSpan.FromHours(2);
-    });
+});
 
 builder.Services.AddAuthentication(options =>
 {
@@ -61,10 +68,6 @@ builder.Services.AddAuthentication(options =>
     }
 );
 
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.AddPolicy("getUsers", policy => policy.RequireRole("Admin"));
-//});
 
 // Configure authorization
 builder.Services.AddAuthorization(options =>
@@ -117,8 +120,6 @@ builder.Services.AddSwaggerGen(option =>
 
     });
 
-// Enable CORS
-builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -130,13 +131,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
 
-app.UseCors(options =>
-{
-    options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-});
-
-//app.UseRouting();
+app.UseCors(clientsCORSPolicy);
 
 app.UseAuthentication();
 app.UseAuthorization();

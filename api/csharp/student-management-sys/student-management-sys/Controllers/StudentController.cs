@@ -1,16 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using student_management_sys.Configs;
 using student_management_sys.Dto;
 using student_management_sys.Entity;
 using student_management_sys.Inputs;
 using student_management_sys.Services;
-using System.Configuration;
 
 namespace student_management_sys.Controllers
 {
@@ -33,7 +30,7 @@ namespace student_management_sys.Controllers
             csvService = new CSVService();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> Create([FromBody] StudentInput studentInput)
@@ -76,7 +73,7 @@ namespace student_management_sys.Controllers
             return Ok(student);           
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("get-all")]
         public async Task<ActionResult<StudentDto>> GetStudents()
         {
@@ -156,7 +153,7 @@ namespace student_management_sys.Controllers
 
         private bool EntryExist(string email)
         {
-            return (context.Users?.Any(user => user.Email == email)).GetValueOrDefault();
+            return (context.Accounts?.Any(account => account.Email == email)).GetValueOrDefault();
         }
     }
 }

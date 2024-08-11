@@ -1,9 +1,9 @@
-export interface Profile {
+export interface IProfile {
     
     id: string;
     dashboard: string
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
     email: string;
     idNumber?: string;
     physicalAddress?: string;
@@ -13,5 +13,6 @@ export interface Profile {
     grade?: string;
     role: string;
     profilePic: string
+    phoneNumber: string
 
 }

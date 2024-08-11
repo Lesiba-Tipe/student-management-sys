@@ -35,7 +35,7 @@ namespace student_management_sys.Services
             return await accountManager.CreateAsync(account, password);
         }
 
-        public async Task<int> Update(AccountDto accountDto)
+        public async Task<int> UpdateAsync(AccountDto accountDto)
         {
             var entity = context.Users.First(x => x.Id == accountDto.Id);
 
@@ -54,9 +54,7 @@ namespace student_management_sys.Services
 
             //Edit Physical Address object here...
 
-            context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
-            
+            context.Entry(entity).State = EntityState.Modified;
 
             var results = await context.SaveChangesAsync();
 

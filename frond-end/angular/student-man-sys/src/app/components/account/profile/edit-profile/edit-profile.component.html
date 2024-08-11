@@ -1,0 +1,67 @@
+<app-nav-bar></app-nav-bar>
+
+<section class="edit">
+    
+    <div class="edit-group">
+        <h5>Edit your profile</h5>
+        <form disabled #formProfileUpdate="ngForm" (ngSubmit)="updateProfile()">
+
+            <div class="row">
+                <div class="col">
+                    <label for="firstname"> Firstname</label>
+                    <input  [(ngModel)]="profile.firstName" name="firstname" id="firstname" type="text"         class="form-control"   #firstname="ngModel" required >
+                    
+                    <div class="message" *ngIf="firstname.invalid && (firstname.touched || firstname.dirty) || submitted">
+                        <div *ngIf="firstname.errors?.['required']">Firstname is required.</div>                        
+                    </div>
+                </div>
+                    
+                <div class="col">
+                    <label for="Lastname">Lastname</label>
+                    <input [(ngModel)]="profile.lastName" name="lastname" id="lastname" type="text" class="form-control" #lastname="ngModel" required>
+
+                    <div class="message" *ngIf="lastname.invalid && (lastname.touched || lastname.dirty) || submitted">
+                        <div *ngIf="lastname.errors?.['required']">Lastname is required.</div>                        
+                    </div>
+                </div>
+
+            </div>
+
+            <div *ngIf="profile.role === 'student'" class="row">
+                <div class="col">
+                    <label>ID number</label>
+                    <input  [(ngModel)]="profile.idNumber" name="idNumber" type="text" class="form-control" disabled >
+                </div>
+                    
+                <div class="col">
+                    <label>Date of birth</label>
+                    <input [(ngModel)]="profile.dateOfBirth" name="dateOfBirth" id="dateOfBirth" type="text" class="form-control" disabled>
+                </div>
+            </div>
+
+            <div *ngIf="profile.role === 'student'" class="row">
+                <div class="col">
+                    <label for="firstname">Grade</label>
+                    <input  [(ngModel)]="profile.grade" name="grade" type="text" class="form-control" disabled>
+                </div>
+                    
+                <div class="col">
+                    <label>Student no.</label>
+                    <input [(ngModel)]="profile.studentNo" name="studentNo" type="text" class="form-control" disabled>
+                </div>
+
+                <div class="col">
+                    <label>Gender</label>
+                    <input [(ngModel)]="profile.gender" name="gender" type="text" class="form-control" disabled>
+                </div>
+            </div>
+
+            <input type="submit" value="Save" class=" button btn btn-success">
+        </form>
+    </div>
+    
+</section>
+
+<div id="succ-err-alert" class="bi alert alerts alert-dismissible fade show" role="alert">
+    {{ alertMessage }}
+</div>

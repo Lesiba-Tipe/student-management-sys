@@ -1,0 +1,68 @@
+<section class="users-list">
+
+    <div class="table-wrapper">
+        <table mat-table [dataSource]="students" class="mat-elevation-z8">
+    
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Name Column [FullName and ID number]-->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+    
+              <td mat-cell *matCellDef="let student">
+    
+                <div class="name-column">
+                  <img mat-card-avatar [src]="student.profilePic" alt="{{ student.name }}" />
+                  <div class="user-info">
+                    <span class="fw-bold"> {{student.firstName}} {{student.lastName}}</span>
+                    <span class="email">{{ student.idNumber }}</span>
+                  </div>
+                </div>
+    
+              </td>
+    
+            </ng-container>
+          
+            <!-- Academics Column [studentNo and grade]-->
+            <ng-container matColumnDef="academics">
+              <th mat-header-cell *matHeaderCellDef> Academics </th>
+              <td mat-cell *matCellDef="let student">
+    
+                <div class="name-column">
+                  <div class="user-info">
+                    <span class="fw-bold">{{ student.studentNumber }}</span>
+                    <span class="email">Grade: {{student.grade }}</span>
+                  </div>
+                </div>
+    
+              </td>
+            </ng-container>
+          
+            <!-- Contacts Column [email and phone number] -->
+            <ng-container matColumnDef="contacts">
+              <th mat-header-cell *matHeaderCellDef> Contacts </th>
+              <td mat-cell *matCellDef="let student">
+    
+                <div class="name-column">
+                  <div class="user-info">
+                    <span class="fw-bold">{{ student.phoneNumber }}</span>
+                    <span class="email">{{student.email }}</span>
+                  </div>
+                </div>
+    
+              </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="symbol">
+              <th mat-header-cell *matHeaderCellDef> Symbol </th>
+              <td mat-cell *matCellDef="let student"> {{student.symbol}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+             
+</section>

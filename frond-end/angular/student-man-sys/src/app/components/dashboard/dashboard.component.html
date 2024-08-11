@@ -1,15 +1,21 @@
+<app-nav-bar></app-nav-bar>
+<app-side-bar></app-side-bar>
+
 <section>
+     <div *ngIf="profile.role === 'guest'">
+      <!-- Create and call guest Component here -->
+    </div>
 
-    <div class="nav-bar">
-       
-        <h4>{{profile.dashboard}}</h4>
+    <div *ngIf="profile.role === 'student'">
+      <app-student></app-student>
+    </div>
 
-        <div class="profile">
-            <ul>
-              <li><a href="" routerLink="/profile" class="bi bi-person-fill"> {{profile.firstname}} {{profile.lastname}}</a></li>
-              <li><a href="" (click)="logout()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout" class="bi bi-box-arrow-left"></a></li>
-            </ul> 
-        </div>
-    
-     </div>
+    <div *ngIf="profile.role === 'parent'">
+      <app-parent></app-parent>
+    </div>
+
+    <div *ngIf="profile.role === 'admin'">
+      <app-admin></app-admin>
+    </div>
 </section>
+

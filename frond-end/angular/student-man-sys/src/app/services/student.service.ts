@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class StudentService {
 
-  PATH_OF_API = environment.apiUrl + 'api/';
+  PATH_OF_API = environment.apiUrl + 'student/';
 
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   constructor(
@@ -17,25 +17,19 @@ export class StudentService {
     private authService: AuthService
   ) {}
 
-
-  public getUsers(): Observable<any[]> {
-    console.log('UserService-getUsers()')
-    return this.httpclient.get<any>(this.PATH_OF_API + 'user/users');
+  public get(): Observable<any[]> {
+    return this.httpclient.get<any>(this.PATH_OF_API + 'get-all');
   }
 
-  public getUserById(id: string) {
-    return this.httpclient.get<any>(this.PATH_OF_API + `user/${id}`);
-  }
- 
-  updateUser(id: number | string, entry: any) {
-    return this.httpclient.put(this.PATH_OF_API + `user/${id}`, entry);
+  public getById(id: string) {
+    return this.httpclient.get<any>(this.PATH_OF_API + `get-student/${id}`);
   }
 
-  public edit(user: any) {
-    return this.httpclient.put(this.PATH_OF_API + `user/update/${user.id}`,user)
+  public edit(student: any) {
+    return this.httpclient.put(this.PATH_OF_API + `update/${student.id}`,student)
   }
 
   public delete(id: string) {
-    return this.httpclient.delete<any>(this.PATH_OF_API + `user/delete/${id}`);
+    return this.httpclient.delete<any>(this.PATH_OF_API + `delete/${id}`);
   }
 }

@@ -1,0 +1,44 @@
+<app-nav-bar></app-nav-bar>
+<app-side-bar></app-side-bar>
+
+<div class="wrapper">
+  <i type="button" class="bi bi-cloud-arrow-up-fill fs-2 " data-bs-toggle="modal" data-bs-target="#uploadModal"></i>
+</div>
+
+<h6 class="text-center"><a routerLink="/students" class="">STUDENTS</a></h6>
+
+<!-- <app-students-list></app-students-list> -->
+<router-outlet></router-outlet>
+
+
+<!-- Modal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Upload file (.csv)</h1>
+        <button #btnCloseModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+ 
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Select File</label>
+            <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)" accept=".csv">
+          </div>
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button (click)="onSubmit()" type="button" class="btn btn-primary">Save</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
